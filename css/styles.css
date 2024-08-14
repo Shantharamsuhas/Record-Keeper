@@ -1,0 +1,13 @@
+
+body{
+    background-color: rgb(16, 112, 112);
+}
+
+*{
+    color: aliceblue;
+}
+
+#Update{
+    display: none;
+}
+
