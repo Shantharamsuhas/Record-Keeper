@@ -138,25 +138,48 @@ function deleteData(index) {
 
 
   function updateData(index) {
-    // Retrieve the data from local storage
-    const peopleList = JSON.parse(localStorage.getItem('pplList'));
-  
-    // Access the item to be updated
-    const personToUpdate = pplList[index];
-  
-    // Create a form or modal to edit the person's data
-    // ... (implementation of the editing interface)
-  
-    // Handle form submission or modal closure
-    // ... (implementation of data update logic)
-  
-    // Update the pplList array
-    pplList[index] = updatedPerson;
-  
-    // Save the updated data back to local storage
-    localStorage.setItem('pplList', JSON.stringify(pplList));
-  
-    // Update the table display
-    showData();
+
+    document.getElementById("Submit").style.display="none";
+    document.getElementById("Update").style.display="block";
+
+    var peopleList;
+
+    if(localStorage.getItem("peopleList")==null){
+        peopleList=[];
+    }
+    else{
+        peopleList=JSON.parse(localStorage.getItem("peopleList"));
+    }
+
+    document.getElementById("name").value = peopleList[index].name;
+    document.getElementById("age").value = peopleList[index].age;
+    document.getElementById("address").value = peopleList[index].address;
+    document.getElementById("email").value = peopleList[index].email;
+
+    document.querySelector("#Update").onclick = function() {
+        if(validateForm()== true){
+            peopleList[index].name= document.getElementById("name").value;
+            peopleList[index].age= document.getElementById("age").value;
+            peopleList[index].address= document.getElementById("address").value;
+            peopleList[index].email= document.getElementById("email").value;
+
+            localStorage.setItem("peopleList",JSON.stringify(peopleList));
+
+            showData();
+
+            document.getElementById("name").value="";
+            document.getElementById("age").value="";
+            document.getElementById("address").value="";
+            document.getElementById("email").value="";
+            
+            //Update hides and add shows on screen
+            document.getElementById("Submit").style.display="none";
+            document.getElementById("Update").style.display="block";
+
+
+
+        }
+    }
+
   }
   
